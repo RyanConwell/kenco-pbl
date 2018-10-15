@@ -24,4 +24,8 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    # register the database commands
+    from backend import db
+    db.init_app(app)
+
     return app
