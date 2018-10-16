@@ -2,13 +2,12 @@ import os
 
 from flask import Flask
 
-
 def create_app(test_config=None):
     # Create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='developmentsecretisnotgoodsecret',
-        DATABASE=os.path.join(app.instance_path, 'backend.sqlite')
+        DATABASE=os.path.join(app.instance_path, 'backend.sqlite'),
     )
 
     if test_config is None:
@@ -27,5 +26,10 @@ def create_app(test_config=None):
     # register the database commands
     from backend import db
     db.init_app(app)
+
+    # apply blueprints to the app (and init mail)
+    from backend import api
+    app.register_blueprint(api.bp)
+    api.mail.init_app(app)
 
     return app
