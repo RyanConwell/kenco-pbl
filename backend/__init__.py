@@ -28,8 +28,9 @@ def create_app(test_config=None):
     db.init_app(app)
 
     # apply blueprints to the app (and init mail)
-    from backend import api
+    from backend import api, monitor
     app.register_blueprint(api.bp)
+    app.register_blueprint(monitor.bp)
     api.mail.init_app(app)
 
     return app

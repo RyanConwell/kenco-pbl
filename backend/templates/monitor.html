@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Restock Requests</title>
+</head>
+<body>
+<main>
+    <h2>Restock Requests</h2>
+    <table>
+        <tr>
+            <th>Time</th>
+            <th>Product</th>
+            <th>Location</th>
+        </tr>
+        {% for request in requests %}
+            <tr>
+                <td>{{ request['created'] }}</td>
+                <td>{{ request['product'] }}</td>
+                <td>{{ request['location'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</main>
+</body>
+</html>
